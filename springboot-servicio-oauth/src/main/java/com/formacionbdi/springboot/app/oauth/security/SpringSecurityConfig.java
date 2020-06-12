@@ -30,7 +30,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {//Permit
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {//Registramos el usuarioService en el objeto auth
 		auth.userDetailsService(this.usuarioService).passwordEncoder(passwordEncoder())//Registramos el usuarioService en el objeto auth, y encriptamos la contraseña cuando se logee el cliente applicacion.
 		.and().authenticationEventPublisher(eventPublisher);//Gestiona el eventPublisher, si a fallado, devolvera una falla de autentificacion, si  a tenido exito devolvera un objeto eventpublisher el cual podremos personalizar.
-		System.out.println("SpringSecurityConfig CONFIGURE(AUTHENTICATION MANAGER BUILDER)");
+		
 		
 	}
 

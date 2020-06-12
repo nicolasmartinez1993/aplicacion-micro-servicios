@@ -14,8 +14,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 
-//Esta es la clase producto- Aqui tenemos toda la informacion que contiene el objeto 
-//producto
+
 @Entity
 @Table(name = "productos")
 public class Producto implements Serializable{

@@ -20,41 +20,41 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-@RefreshScope//Acutaliza el alcanza en tiempo de ejecución
-@Configuration//Lo habilitamos como un servidor de recursos.
+@RefreshScope
+@Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
-	@Value("${config.security.oauth.jwt.key}")//Inyectamos los datos del la llave ubicada en server config a la variable.
+	@Value("${config.security.oauth.jwt.key}")
 	private String jwtKey;
 	
 	@Override
-	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {//Configura el servidor de recursos. Guarda el token generado en los recursos del servidor a los que se tendra acceso.
+	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 		resources.tokenStore(tokenStore());
 	}
 
 	@Override
-	public void configure(HttpSecurity http) throws Exception {//Aqui se configura las rutas de acceso de los usuarios mediante http a los recursos
-		http.authorizeRequests().antMatchers("/api/security/oauth/**").permitAll()//Autoriza a todo el mundo aunque no tengo ningun rol.
+	public void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/api/security/oauth/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/productos/listar", "/api/items/listar", "/api/usuarios/usuarios").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/productos/ver/{id}", 
 				"/api/items/ver/{id}/cantidad/{cantidad}", 
-				"/api/usuarios/usuarios/{id}").hasAnyRole("ADMIN", "USER")//Permite listar productos, items e usuarios incluso por id a los quien posee el rol usuario o admin.
-		.antMatchers("/api/productos/**", "/api/items/**", "/api/usuarios/**").hasRole("ADMIN")//Autoriza cualquier accion disponible en usuarios, item o usuarios a quien posee el rol admin.
-		.anyRequest().authenticated()//cualquier ruta no indicada, es de acceso publico si se a validado el usuario.
+				"/api/usuarios/usuarios/{id}").hasAnyRole("ADMIN", "USER")
+		.antMatchers("/api/productos/**", "/api/items/**", "/api/usuarios/**").hasRole("ADMIN")
+		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
 	}
 	
 	@Bean
-	public CorsConfigurationSource corsConfigurationSource() {//Cors da acceso a servicios ubicados en otro servidor(normalmente el frontend) al servidor de recursos, en nuestro caso zuul.
+	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
-		corsConfig.setAllowedOrigins(Arrays.asList("*"));//Añade de forma automatica a cors cualquier origen.
-		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));//permite todas las acciones indicadas(independientemente de los permisos autorizados por oauth2).
+		corsConfig.setAllowedOrigins(Arrays.asList("*"));
+		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
 		corsConfig.setAllowCredentials(true);
 		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
 		
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", corsConfig);//Registramos la configuracion aplicando a todas las rutas con /**
+		source.registerCorsConfiguration("/**", corsConfig);
 		
 		return source;
 	}

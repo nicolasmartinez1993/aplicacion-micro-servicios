@@ -10,14 +10,14 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 
-//ESte filtro se aplica antes de ser ejecutado el servicio.
+
 @Component
 public class PreTiempoTranscurridoFilter extends ZuulFilter{
 	
 	private static Logger log = LoggerFactory.getLogger(PreTiempoTranscurridoFilter.class);
 
 	@Override
-	public boolean shouldFilter() {//Es una condicion que si devuelve se ejecuta el run().
+	public boolean shouldFilter() {
 		
 		return true;
 	}

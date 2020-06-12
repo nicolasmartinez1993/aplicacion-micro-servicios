@@ -25,25 +25,25 @@ public class UsuarioService implements IUsuarioService, UserDetailsService {// U
 	private Logger log = LoggerFactory.getLogger(UsuarioService.class);
 
 	@Autowired
-	private UsuarioFeignClient client; //Nos permite comunicarnos con el servicio usuarios.
+	private UsuarioFeignClient client;
 	
 	@Autowired
-	private Tracer tracer;//Nos permitira agregar informacion sobre el seguimiento.
+	private Tracer tracer;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {//obtiene al usuario por el username mediante un cliente http, basicamente recoge el username y password que emos introducido en postman.
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = client.findByUsername(username);
 
-		try {//Comprobara si los parametros usuario y contraseña son correctos, si lo son, devolvera una objeto usuario con los datos de acceso.
+		try {
 
-			List<GrantedAuthority> authorities = usuario.getRoles().stream()//convertimos nuestros tipos roles de usuario a tipo GrantedAuthority, Stream convierte el flujo de datos
-					.map(role -> new SimpleGrantedAuthority(role.getNombre()))// mapeamos el flujo en roles de tipo SimpleGrantedAuthority
+			List<GrantedAuthority> authorities = usuario.getRoles().stream()
+					.map(role -> new SimpleGrantedAuthority(role.getNombre()))
 					.peek(authority -> log.info("Role: " + authority.getAuthority())).collect(Collectors.toList());
 			log.info("Usuario autentificado: " + username);
 			
 			return new User(usuario.getUsername(), usuario.getPassword(), usuario.getEnabled(), true, true, true,
 					authorities);
-		} catch (FeignException e) {//Sino existe devuelve un mensaje de error.
+		} catch (FeignException e) {
 			String error="Error en el login, no existe el usuario'" + username + "' en el sistema";
 			log.error(error);
 			

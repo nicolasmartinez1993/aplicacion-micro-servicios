@@ -27,12 +27,9 @@ import com.formacionbdi.springboot.app.item.models.Item;
 import com.formacionbdi.springboot.app.item.models.service.ItemService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
-//Es un servicio Rest. Esta clase es un controlador de los item
-//Lo que permite manejar los item que tenemos mediante el mapeo con GET, por lo funciona por url.
-//RestController hace que cada método de manejo de solicitudes de la clase de controlador serializa
-//automáticamente los objetos devueltos en HttpResponse.
-@RefreshScope //Que el alcanze de la aplicacion se puede refrescar en tiempo de ejecucion(sin encesidad de reeiniciar el servidor).
-@RestController //se compone de: @Component(creacion bean en spring) y @ResponseBody(respuesta en el cuerpo de mediante http).
+
+@RefreshScope 
+@RestController
 public class ItemController {
 	
 	private static Logger log = LoggerFactory.getLogger(ItemController.class);

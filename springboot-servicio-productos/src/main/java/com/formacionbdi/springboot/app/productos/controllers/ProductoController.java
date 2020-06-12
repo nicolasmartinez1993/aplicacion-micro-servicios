@@ -18,11 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.formacionbdi.springboot.app.commons.models.entity.Producto;
 import com.formacionbdi.springboot.app.productos.models.service.IProductoService;
 
-//s un servicio Rest. Esta clase es un controlador de los productos
-//Lo que permite manejar los productos que tenemos mediante el mapeo de los metodos con las peticiones http(GET, POST, DELETE, PUT), por lo que funciona por url.
-//RestController hace que cada método de manejo de solicitudes de la clase de controlador serializa automáticamente los objetos devueltos en HttpResponse.
-@RestController //Indica que es un controlador REST, queire decir que incluye  los bean @Controler y @ResponseBody. Controller indica que se que se crea un bean en 
-//el contenedor de spring y @responsebody indica que devuelve directamente un objeto serializado en JSON por una httpResponse.
+
+@RestController
 public class ProductoController {
 	
 	@Autowired

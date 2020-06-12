@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
-@EnableEurekaServer //En el main del servicio indicamos con @EnableEurekaServer que es un servidor eureka y actuara como tal.
+@EnableEurekaServer 
 @SpringBootApplication
 public class SpringbootServicioEurekaServerApplication {
 

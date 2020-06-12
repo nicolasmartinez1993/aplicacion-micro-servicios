@@ -9,16 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.formacionbdi.springboot.app.commons.models.entity.Producto;
 import com.formacionbdi.springboot.app.productos.models.dao.ProductoDao;
 
-//Esta clase implementa el interfaz IproductoService y usa un objeto con la 
-//interfaz de ProductoDao para realizar las acciones inidcadas con la BDD.
+
 @Service
 public class ProductoServiceImp implements IProductoService{
 
-	@Autowired //Este bean busca en el contenedor spring un contructor o metodo con el nombre indicado para inyectar los datos.
+	@Autowired 
 	private ProductoDao productoDao;
 	
 	@Override
-	@Transactional(readOnly = true)//indica que es una transaccion con la base de datos. En este caso solo permite leer.
+	@Transactional(readOnly = true)
 	public List<Producto> findAll() {
 		return (List<Producto>) productoDao.findAll();
 	}

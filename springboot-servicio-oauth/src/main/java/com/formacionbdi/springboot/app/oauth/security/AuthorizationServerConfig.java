@@ -21,7 +21,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @RefreshScope
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{ //La clase extendida define las propiedades del servidor
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{ 
 	
 	@Autowired
 	private Environment env;
@@ -30,26 +30,25 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private AuthenticationManager authenticationManager;//Controlador de autentificaciones
+	private AuthenticationManager authenticationManager;
 	
 	@Autowired
 	private InfoAdicionalToken infoAdicionalToken;
 
 	@Override
-	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {//Indica los permisos que van a tener nuestros endpoints del servidor de autorizacion para generar y validar el token
-		security.tokenKeyAccess("permitAll()")//tokenKeyAccess es el endpoint para generar el token. Permite que cualquiera pueda acceder a la ruta para generar un token.
-		.checkTokenAccess("isAuthenticated()");//Valida el token
+	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+		security.tokenKeyAccess("permitAll()")
+		.checkTokenAccess("isAuthenticated()");
 	}
 
 	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {//Configura los clientes 
-		clients.inMemory().withClient(env.getProperty("config.security.oauth.client.id"))//Guardamos la aplicacion cliente obteniendo su id del config server
-		.secret(passwordEncoder.encode(env.getProperty("config.security.oauth.client.secret")))//guardamos la llave secreta de la aplicacion indicada en el config server
-		.scopes("read","write") // Permiso de la app cliente, leer y escribir
-		.authorizedGrantTypes("password", "refresh_token")//Indica como vamos a obtener el token, en nuestro caso con password, y tambien un token que nos permite obtener otro token
-		//de acceso para cuando caduque el anterior.
-		.accessTokenValiditySeconds(3600)//Indica que el token tendra una duracion de 3600 segundos antes de caducar.
-		.refreshTokenValiditySeconds(3600);//Indica que el refresh token tendra tambien 3600 segundos antes de caducar.
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		clients.inMemory().withClient(env.getProperty("config.security.oauth.client.id"))
+		.secret(passwordEncoder.encode(env.getProperty("config.security.oauth.client.secret")))
+		.scopes("read","write") 
+		.authorizedGrantTypes("password", "refresh_token")
+		.accessTokenValiditySeconds(3600)
+		.refreshTokenValiditySeconds(3600);
 
 	}
 
@@ -62,19 +61,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.tokenStore(tokenStore())
 		.accessTokenConverter(accessTokenConverter())
 		.tokenEnhancer(tokenEnhancerChain);
-		//retorna un token JSON con todos los datos introducidos
+	
 		
 	}
 	@Bean
-	public JwtTokenStore tokenStore() {//Aqui se guarda almacena los identificadores del servidor de autentificacion va suministrando.
+	public JwtTokenStore tokenStore() {
 		
-		return new JwtTokenStore(accessTokenConverter());// Para crear y almacenar el token hay que convertir el token en jwt con todos sus datos.
+		return new JwtTokenStore(accessTokenConverter());
 	}
 
 	@Bean
-	public JwtAccessTokenConverter accessTokenConverter() {//Guarda datos(username, password, roles etc.. en el token)
+	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-		tokenConverter.setSigningKey(env.getProperty("config.security.oauth.jwt.key"));//Asigna la llave de la firma al token para validarlo en el servidor de recursos
+		tokenConverter.setSigningKey(env.getProperty("config.security.oauth.jwt.key"));
 		
 		return tokenConverter;
 	}

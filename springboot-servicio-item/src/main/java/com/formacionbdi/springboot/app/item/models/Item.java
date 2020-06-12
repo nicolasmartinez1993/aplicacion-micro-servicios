@@ -1,8 +1,7 @@
 package com.formacionbdi.springboot.app.item.models;
 
 import com.formacionbdi.springboot.app.commons.models.entity.Producto;
-//Mediante el producto creamos el item, que nos indica que producto y que 
-//cantidad hemos seleccionado.
+
 public class Item {
 
 	private Producto producto;

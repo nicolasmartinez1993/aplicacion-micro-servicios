@@ -9,9 +9,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
-@EnableCircuitBreaker //Habilita un sistema de deteccion de fallos. En nuestro caso  usaremos hystrix.
-@EnableEurekaClient //Visible para eureka como cliente.
-@EnableFeignClients //Habilita el uso de clientes Feign y permite inyectarlos en otros componentes de spring.
+@EnableCircuitBreaker
+@EnableEurekaClient 
+@EnableFeignClients 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class SpringbootServicioItemApplication {

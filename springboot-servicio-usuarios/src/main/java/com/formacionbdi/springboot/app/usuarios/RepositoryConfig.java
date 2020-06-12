@@ -12,6 +12,6 @@ public class RepositoryConfig implements RepositoryRestConfigurer{
 
 	@Override
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-		config.exposeIdsFor(Usuario.class, Role.class);//Simplemente para exponer los id del usuario en el json.
+		config.exposeIdsFor(Usuario.class, Role.class);
 	}
 }

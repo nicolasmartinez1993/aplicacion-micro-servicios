@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.formacionbdi.springboot.app.commons.models.entity.Producto;
 
-//Es una interfaz que mapea los metodos para acceder a la clase producto.
 
-@FeignClient(name = "servicio-productos") //Este bean habilita la interfaz como un cliente Feign con el nombre indicado.
+
+@FeignClient(name = "servicio-productos")
 public interface ProductoClienteRest {
 	
-	//@(Post, Get, Delete, put)Mapping("/(nombre de la ruta)"): mapea el metodo, haciendole accesible mediante 
-	//la url indicada y se indicara la informacion a intriducir (ya que es un post) en el cuerpo de la pagina con @RequestBody.
 	
+
 	@GetMapping("/listar")
 	public List<Producto> listar();
 	
