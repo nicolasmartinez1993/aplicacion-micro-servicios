@@ -1,0 +1,11 @@
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="java.lang.Enum"><rhs name\="org.springframework.http.HttpStatus"/><rhs name\="javax.persistence.FetchType"/><rhs name\="org.springframework.http.HttpMethod"/></lhs><lhs name\="org.springframework.web.cors.CorsConfigurationSource"><rhs name\="org.springframework.web.cors.UrlBasedCorsConfigurationSource"/></lhs><lhs name\="org.springframework.web.cors.UrlBasedCorsConfigurationSource"><rhs name\="org.springframework.web.cors.UrlBasedCorsConfigurationSource"/></lhs><lhs name\="org.springframework.boot.web.servlet.AbstractFilterRegistrationBean"><rhs name\="org.springframework.boot.web.servlet.FilterRegistrationBean"/></lhs><lhs name\="org.springframework.boot.web.servlet.DynamicRegistrationBean"><rhs name\="org.springframework.boot.web.servlet.FilterRegistrationBean"/></lhs><lhs name\="org.springframework.boot.web.servlet.RegistrationBean"><rhs name\="org.springframework.boot.web.servlet.FilterRegistrationBean"/></lhs><lhs name\="org.springframework.boot.web.servlet.ServletContextInitializer"><rhs name\="org.springframework.boot.web.servlet.FilterRegistrationBean"/></lhs><lhs name\="org.springframework.core.Ordered"><rhs name\="org.springframework.boot.web.servlet.FilterRegistrationBean"/></lhs><lhs name\="org.springframework.boot.web.servlet.FilterRegistrationBean"><rhs name\="org.springframework.boot.web.servlet.FilterRegistrationBean"/></lhs></history>
+content_assist_number_of_computers=18
+content_assist_proposals_background=255,255,255
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.internal.ui.navigator.librariesnode=true
+org.eclipse.jdt.ui.formatterprofiles.version=18
+spelling_locale_initialized=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true
